@@ -1,9 +1,8 @@
-#include <iostream>
-
-using namespace std;
+#include "Utility.h"
 
 int main()
 {
-    cout << "Code initial\n";
+    init();
+    logger->info("Ouverture de l'application");
     return 0;
 }
