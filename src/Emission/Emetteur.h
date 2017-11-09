@@ -15,7 +15,6 @@ class Emetteur
         void envoyerMessage(const string &message);
 
     private:
-        void envoyerEnTete(const string &message);
         void envoyerBloc(const string &message, int iDebut, int iFin);
         ImplEmetteurPtr &&impl;
         ParametresCommunication param;

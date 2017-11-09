@@ -23,12 +23,11 @@ void Emetteur::envoyerBloc(const string &message, int iDebut, int iFin)
     impl->changerEtat(false);
 }
 
-void Emetteur::envoyerMessage(const string &message)
+void Emetteur::envoyerMessage(const string &messagebase)
 {
-    logger->info("Début de l'envoi du message : {}", message);
+    logger->info("Début de l'envoi du message : {}", messagebase);
+    string message = messagebase + '\0'; // Octet 0 pour signaler la fin de la transmission
     auto messageLen = (int)(message.length());
-    logger->debug("Envoi de l'en-tête (longueur du message : {})", messageLen);
-    envoyerEnTete(message);
 
     if (param.SYSTEME_BLOCS)
     {
@@ -47,16 +46,6 @@ void Emetteur::envoyerMessage(const string &message)
         envoyerBloc(message, 0, messageLen);
     }
 
-    logger->info("Message envoyé : {}", message);
-}
-
-void Emetteur::envoyerEnTete(const string &message)
-{
-    // Structure de l'en-tête : longueur du message codé sur 4 octets (entier signé)
-    auto messageLen = (int)(message.length());
-    string enTete;
-    auto byte = (char*)&messageLen;
-    for (int iOctet = 0; iOctet < 4; ++iOctet) { enTete.push_back(byte[iOctet]); }
-    envoyerBloc(enTete, 0, 4);
+    logger->info("Message envoyé : {}", messagebase);
 }
 
