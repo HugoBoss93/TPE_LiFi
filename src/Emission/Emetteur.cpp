@@ -39,6 +39,7 @@ void Emetteur::envoyerMessage(const string &messagebase)
             int iFin = std::min(messageLen, (iBloc + 1) * param.BLOC_LEN);
             logger->debug("Envoi du bloc {}", iBloc);
             envoyerBloc(message, iDebut, iFin);
+            if (iBloc + 1 != nbBlocs) { msleep(param.BLOC_DELAI); }
         }
     }
     else
