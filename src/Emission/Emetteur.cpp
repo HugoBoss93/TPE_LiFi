@@ -3,7 +3,7 @@
 void Emetteur::envoyerBloc(const string &message, int iDebut, int iFin)
 {
     impl->changerEtat(true); // 1 de synchronisation
-    msleep(param.BIT_DELAI);
+    msleep(repereTemporel, param.BIT_DELAI);
 
     for (int iOctet = iDebut; iOctet < iFin; ++iOctet)
     {
@@ -16,7 +16,7 @@ void Emetteur::envoyerBloc(const string &message, int iDebut, int iFin)
             bit = (bool)((octet >> iPow) & 1);
 
             impl->changerEtat(bit);
-            msleep(param.BIT_DELAI);
+            msleep(repereTemporel, param.BIT_DELAI);
         }
     }
 
@@ -26,6 +26,7 @@ void Emetteur::envoyerBloc(const string &message, int iDebut, int iFin)
 void Emetteur::envoyerMessage(const string &messagebase)
 {
     logger->info("Début de l'envoi du message : {}", messagebase);
+    repereTemporel = now();
     string message = messagebase + '\0'; // Octet 0 pour signaler la fin de la transmission
     auto messageLen = (int)(message.length());
 
@@ -39,7 +40,7 @@ void Emetteur::envoyerMessage(const string &messagebase)
             int iFin = std::min(messageLen, (iBloc + 1) * param.BLOC_LEN);
             logger->debug("Envoi du bloc {}", iBloc);
             envoyerBloc(message, iDebut, iFin);
-            if (iBloc + 1 != nbBlocs) { msleep(param.BLOC_DELAI); }
+            if (iBloc + 1 != nbBlocs) { msleep(repereTemporel, param.BLOC_DELAI); }
         }
     }
     else

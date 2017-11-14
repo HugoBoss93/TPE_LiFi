@@ -8,7 +8,8 @@ void init()
     logger->set_level(logLevel);
 }
 
-void msleep(int tempsMillisecondes)
+void msleep(std::chrono::time_point<std::chrono::steady_clock> &pointDepart, int tempsMillisecondes)
 {
-    std::this_thread::sleep_for(std::chrono::milliseconds(tempsMillisecondes));
+    pointDepart += std::chrono::milliseconds(tempsMillisecondes);
+    std::this_thread::sleep_until(pointDepart);
 }
