@@ -16,7 +16,6 @@ class Emetteur
         void envoyerMessage(const string &message);
 
     private:
-        void envoyerBloc(const string &message, int iDebut, int iFin);
         ImplEmetteurPtr &&impl;
         ParametresCommunication param;
         std::chrono::time_point<std::chrono::steady_clock> repereTemporel;

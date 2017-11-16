@@ -10,9 +10,6 @@ struct ParametresCommunication
     /// Longueur d'un bloc, en octets
     int BLOC_LEN = 1;
 
-    /// Délai entre deux blocs, en millisecondes
-    int BLOC_DELAI = 30;
-
     /// Délai entre deux bits d'un même bloc
     int BIT_DELAI = 15;
 };
