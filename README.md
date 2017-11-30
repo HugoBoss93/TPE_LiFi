@@ -13,3 +13,4 @@ Lycée Louis le Grand (Paris), Première S1, 2017-2018
 ## Dépendances
 
 - Logging : spdlog -> https://github.com/gabime/spdlog
+- Processus temps réel : sched.h (API C de Linux) - pas d'alternative pour Windows pour le moment

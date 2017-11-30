@@ -10,8 +10,11 @@ struct ParametresCommunication
     /// Longueur d'un bloc, en octets
     int BLOC_LEN = 1;
 
-    /// Délai entre deux bits d'un même bloc
-    int BIT_DELAI = 15;
+    /// Délai entre deux bits d'un même bloc (en ms)
+    int BIT_DELAI = 5;
+
+    /// Attente supplémentaire après le bit de start (en ms)
+    int BIT_START_SUPPLEMENT = 1;
 };
 
 #endif //TPE_LIFI_PARAMETRESCOMMUNICATION_H

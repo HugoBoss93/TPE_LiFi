@@ -16,6 +16,8 @@ void Emetteur::envoyerMessage(const string &messagebase)
         if (debutBloc)
         {
             // Bit de start
+            impl->changerEtat(false);
+            msleep(repereTemporel, param.BIT_DELAI);
             logger->debug("Envoi du bit de start");
             impl->changerEtat(true);
             msleep(repereTemporel, param.BIT_DELAI);
